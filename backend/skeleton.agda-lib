@@ -1,4 +1,4 @@
-name: acorn
+name: skeleton
 depend:
   agda2hs
 include: src

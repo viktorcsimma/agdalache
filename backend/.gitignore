@@ -10,16 +10,16 @@
 /CMakeFiles/
 /cmake_install.cmake
 /install_manifest.txt
-/AcornConfig.cmake
+/*Config.cmake
 .ninja_deps
 .ninja_log
 build.ninja
 
 # CMake output
 /build
-/AcornShell
-/AcornShell.exe
-/libAcorn.a
+/*Shell
+/*Shell.exe
+/lib*.a
 /Interaction.o
 
 # Cabal-generated files

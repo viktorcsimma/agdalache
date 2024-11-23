@@ -1,4 +1,4 @@
 target_sources(
-    calc
+    ${PROJECT_NAME}
     PRIVATE MainWindow.h
 )

@@ -1,1 +1,1 @@
-target_sources(test PRIVATE main.cpp ViewModelTest.cpp)
+target_sources(${PROJECT_NAME}Test PRIVATE main.cpp ViewModelTest.cpp)

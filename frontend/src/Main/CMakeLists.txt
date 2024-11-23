@@ -1,1 +1,1 @@
-target_sources(calc PRIVATE main.cpp)
+target_sources(${PROJECT_NAME} PRIVATE main.cpp)

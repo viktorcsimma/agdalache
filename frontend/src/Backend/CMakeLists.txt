@@ -1,8 +1,8 @@
 target_sources(
-    calc
+    ${PROJECT_NAME}
     PRIVATE HsAppStateWrapper.cpp Future.cpp
 )
 target_sources(
-    test
+    ${PROJECT_NAME}Test
     PRIVATE HsAppStateWrapper.cpp
 )

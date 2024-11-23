@@ -1,4 +1,4 @@
-#include "../include/Acorn.h"
+#include "../include/Interaction.h"
 #include <stdio.h>
 
 #ifdef _WIN32
@@ -11,15 +11,15 @@
 #endif
 #endif
 
-// See Acorn.h for description.
+// See Interaction.h for description.
 
 #ifdef _WIN32
-void acornInterruptEvaluation() {
+void interruptEvaluation(const char* semaphoreName) {
   // here, we won't actually use the handle
   HANDLE eventHandle = OpenEventA(
     EVENT_MODIFY_STATE,
     FALSE,
-    "AcornInterruptEvent"
+    semaphoreName
   );
   BOOL success = SetEvent(eventHandle);
   CloseHandle(eventHandle);
@@ -31,9 +31,9 @@ void acornInterruptEvaluation() {
 #else
 #if defined(__unix__) || defined(__unix) || \
         (defined(__APPLE__) && defined(__MACH__))
-void acornInterruptEvaluation() {
+void interruptEvaluation(const char* semaphoreName) {
   // opening the already existing semaphore
-  sem_t* semaphore = sem_open("AcornInterruptSemaphore", 0);
+  sem_t* semaphore = sem_open(semaphoreName, 0);
   if (SEM_FAILED == semaphore) {
     fprintf(stderr, "Could not open semaphore\n");
   } else {

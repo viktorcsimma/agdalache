@@ -1,8 +1,8 @@
 target_sources(
-    calc
+    ${PROJECT_NAME}
     PRIVATE MainViewModel.hpp
 )
 target_sources(
-    test
+    ${PROJECT_NAME}Test
     PRIVATE MainViewModel.hpp
 )

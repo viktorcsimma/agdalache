@@ -1,12 +1,10 @@
 cabal-version:       2.2
-name:                acorn
+name:                skeleton
 version:             0.1
-synopsis:            A calculator and library with provably correct Agda reals.
-description:
-  An agda2hs-compatible implementation of Krebbers–Spitters reals, focusing on usability.
+synopsis:            A skeleton project to get started with using the Agda SDK.
 
 -- Ouch... these need to be listed.
-extra-source-files:  acorn.agda-lib,
+extra-source-files:  skeleton.agda-lib,
                      src/*.agda
                      src/Platform/*.agda,
                      src/Test/*.agda,
@@ -60,7 +58,7 @@ library
   -- with a foreign call
   ghc-options:         -threaded
 
-executable AcornShell
+executable Shell
   hs-source-dirs:      src
   main-is:             Main.hs
   -- it only searches online and not among local packages;
@@ -71,7 +69,7 @@ executable AcornShell
                        containers,
                        text,
                        deepseq >= 1.4,
-                       acorn
+                       skeleton
   if os(windows)
     build-depends:     Win32 >= 2.12
   elif os(linux) || os(darwin)
@@ -81,16 +79,16 @@ executable AcornShell
   -- with a foreign call
   ghc-options:         -threaded
 
-test-suite AcornQuickCheck
+test-suite QuickCheckTests
   type:                exitcode-stdio-1.0
   hs-source-dirs:      src
   main-is:             TestMain.hs
-  autogen-modules:     Test.Haskell.Parity
-  other-modules:       Test.Haskell.Parity
+  autogen-modules:     Test.Haskell.ExampleTest
+  other-modules:       Test.Haskell.ExampleTest
   build-depends:       base     >= 4.13    && < 4.20,
                        containers,
                        text,
                        deepseq >= 1.4,
-                       acorn,
+                       skeleton,
                        QuickCheck >= 2.14
   default-language:    GHC2021

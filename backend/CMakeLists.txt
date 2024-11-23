@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.9)
 
+# The name of the project.
+
 # the language is given so that GNUInstallDirs knows where to install
-project(Acorn)
+project(Skeleton)
 
-add_library(Acorn src/All.agda src/acornInterruptEvaluation.c include/TinyHsFFI.h include/Future.h include/Acorn.h)
-add_library(Acorn::Acorn ALIAS Acorn)
+add_library(${PROJECT_NAME} src/All.agda src/interruptEvaluation.c include/TinyHsFFI.h include/Future.h include/Interaction.h)
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-add_executable(AcornShell src/All.agda src/Main.hs)
+add_executable(${PROJECT_NAME}Shell src/All.agda src/Main.hs)
 
 # "Linking" will be the actual compilation (both with agda2hs and ghc).
 # This way, we ensure that there are no additional files and need to copy
@@ -15,10 +17,10 @@ add_executable(AcornShell src/All.agda src/Main.hs)
 # (agda2hs will manage what to update.)
 # And when running `sudo make install` after building,
 # root won't need access to ghc.
-set_target_properties(Acorn PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
   LINKER_LANGUAGE Agda
 )
-set_target_properties(AcornShell PROPERTIES
+set_target_properties(${PROJECT_NAME}Shell PROPERTIES
   LINKER_LANGUAGE Agda
 )
 
@@ -37,8 +39,8 @@ set(CMAKE_Agda_CREATE_STATIC_LIBRARY
           -i${CMAKE_CURRENT_BINARY_DIR}/build/hs:${CMAKE_CURRENT_SOURCE_DIR}/src \
           -hidir ${CMAKE_CURRENT_BINARY_DIR}/build/hi -odir ${CMAKE_CURRENT_BINARY_DIR}/build/o -stubdir ${CMAKE_CURRENT_BINARY_DIR}/build/stub \
           -staticlib -fPIC -optl-pthread -optl-static \
-          -o ${CMAKE_CURRENT_BINARY_DIR}/libAcorn.a \
-          ${CMAKE_CURRENT_BINARY_DIR}/build/hs/All.hs ${CMAKE_CURRENT_SOURCE_DIR}/src/acornInterruptEvaluation.c"
+          -o ${CMAKE_CURRENT_BINARY_DIR}/lib${PROJECT_NAME}.a \
+          ${CMAKE_CURRENT_BINARY_DIR}/build/hs/All.hs ${CMAKE_CURRENT_SOURCE_DIR}/src/interruptEvaluation.c"
 )
 set(CMAKE_Agda_LINK_EXECUTABLE
       "${WINDOWS_ENCODING_COMMAND}"
@@ -47,14 +49,14 @@ set(CMAKE_Agda_LINK_EXECUTABLE
       "ghc --make \
           -i${CMAKE_CURRENT_BINARY_DIR}/build/hs:${CMAKE_CURRENT_SOURCE_DIR}/src \
           -hidir ${CMAKE_CURRENT_BINARY_DIR}/build/hi -odir ${CMAKE_CURRENT_BINARY_DIR}/build/o -stubdir ${CMAKE_CURRENT_BINARY_DIR}/build/stub \
-          -o ${CMAKE_CURRENT_BINARY_DIR}/AcornShell \
+          -o ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Shell \
           ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.hs"
 )
 # we provide for CMake to erase these on cleaning
 file (GLOB_RECURSE CLEAN_FILES LIST_DIRECTORIES true "${CMAKE_CURRENT_BINARY_DIR}/build/*")
-set_target_properties(Acorn
+set_target_properties(${PROJECT_NAME}
     PROPERTIES ADDITIONAL_CLEAN_FILES "${CLEAN_FILES}")
-set_target_properties(AcornShell
+set_target_properties(${PROJECT_NAME}Shell
     PROPERTIES ADDITIONAL_CLEAN_FILES "${CLEAN_FILES}")
 
 # preparing the library to be used by other projects
@@ -63,17 +65,17 @@ include(GNUInstallDirs)
 
 # now, we put our headers in the include/ folder
 # adding project root as an include directory
-target_include_directories(Acorn
+target_include_directories(${PROJECT_NAME}
                            PUBLIC
                            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
-install(FILES include/TinyHsFFI.h include/Future.h include/Acorn.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES include/TinyHsFFI.h include/Future.h include/Interaction.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # For some reason, on Windows, Interaction.o gets corrupted when copied into the library;
 # so it has to be included separately.
 # It can be imported like this:
-# target_link_libraries(calc PRIVATE "${CMAKE_INSTALL_PREFIX}/../Acorn/lib/Interaction.o")
+# target_link_libraries(calc PRIVATE "${CMAKE_INSTALL_PREFIX}/../${PROJECT_NAME}/lib/Interaction.o")
 # (not too elegant, but it works).
 # See my own question at
 # https://stackoverflow.com/questions/78260754/ghc-staticlib-with-ffi-on-windows-tries-to-link-an-executable-with-foreign-ex/78261321#78261321.
@@ -84,39 +86,39 @@ endif()
 
 # see https://stackoverflow.com/questions/55635294/how-to-create-packages-with-cmake
 
-install(TARGETS Acorn
-        EXPORT AcornTargets
+install(TARGETS ${PROJECT_NAME}
+        EXPORT ${PROJECT_NAME}Targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 install(
-        EXPORT AcornTargets
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Acorn
-        NAMESPACE Acorn::
-        FILE AcornTargets.cmake # Not sure if this is still needed
+        EXPORT ${PROJECT_NAME}Targets
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
+        NAMESPACE ${PROJECT_NAME}::
+        FILE ${PROJECT_NAME}Targets.cmake # Not sure if this is still needed
 )
 
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
   "Config.cmake.in"
-  "AcornConfig.cmake"
-  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Acorn
+  "${PROJECT_NAME}Config.cmake"
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
   PATH_VARS
     CMAKE_INSTALL_LIBDIR
   )
 
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/AcornConfigVersion.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
   VERSION 0.1
   COMPATIBILITY SameMinorVersion
   )
 
 # install Config and ConfigVersion files
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/AcornConfig.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/AcornConfigVersion.cmake"
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Acorn"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
   )
 

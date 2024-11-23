@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>AcornCalc</string>
+   <string>Hello world!</string>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedKingdom"/>

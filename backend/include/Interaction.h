@@ -1,5 +1,8 @@
-#ifndef ACORN_H_
-#define ACORN_H_
+#ifndef INTERACTION_H_
+#define INTERACTION_H_
+
+// Here come the declarations of the functions
+// exported from Interaction.agda.
 
 #include "TinyHsFFI.h"
 #if defined(__cplusplus)
@@ -29,11 +32,13 @@ extern int incrementInteger(HsStablePtr appState, int toAdd);
 // can be implemented.
 extern void increaseContinuouslyIntegerAsyncC(HsStablePtr appState, int duration, HsPtr future);
 
-// This is written by ourselves in src/acornInterruptEvaluation.c.
+// This is written by hand in src/interruptEvaluation.c.
 // It interrupts a running calculation
-// by opening and incrementing the "/AcornInterruptSemaphore" POSIX semaphore (on Unix)
-// or opening and triggering the "AcornInterruptEvent" event (on Windows).
-extern void acornInterruptEvaluation();
+// by opening and incrementing a POSIX semaphore (on Unix)
+// or opening and triggering an event (on Windows).
+// The parameter is the name of the semaphore/event
+// to be manipulated.
+extern void interruptEvaluation(const char* semaphoreName);
 
 #if defined(__cplusplus)
 }

@@ -1,2 +1,5 @@
 @PACKAGE_INIT@
-include( "${CMAKE_CURRENT_LIST_DIR}/AcornTargets.cmake" )
+# this has to be written by hand;
+# as in projects importing this project,
+# PROJECT_NAME will probably be different
+include( "${CMAKE_CURRENT_LIST_DIR}/SkeletonTargets.cmake" )

@@ -1,5 +1,5 @@
 #include "Backend/HsAppStateWrapper.hpp"
-#include "Acorn.h"
+#include "Interaction.h"
 
 HsAppStateWrapper::HsAppStateWrapper(): appStatePtr(initAppInteger()) {}
 

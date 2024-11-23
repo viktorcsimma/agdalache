@@ -1,6 +1,6 @@
 target_sources(
     calc
-    PRIVATE MainViewModel.hpp AsyncCalculationAlreadyInProgressException.hpp
+    PRIVATE MainViewModel.hpp
 )
 target_sources(
     test

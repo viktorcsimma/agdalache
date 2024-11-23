@@ -1,4 +1,3 @@
-#include "ViewModel/MainViewModel.hpp"
 #include "View/MainWindow.h"
 
 #include <QApplication>

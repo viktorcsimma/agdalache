@@ -20,27 +20,6 @@ public:
     // This does _not_ destruct the view model; that is the task of the main function.
     ~MainWindow();
 
-public slots:
-    void addButtonClicked();
-    void asyncButtonClicked();
-    // Updates the UI according to the current state of the view model.
-    // The signal-slot mechanism ensures
-    // that this always runs on the main thread
-    // when invoked by a signal.
-    void updateUI();
-    // Makes UI changes
-    // when the last iteration of an asynchronous increase finished.
-    // Invoked by lastIterationFinished().
-    void onLastIterationFinished();
-signals:
-    // Emitted when an iteration has finished
-    // and we wish to display the actual value of the counter.
-    void updateRequested();
-    // Emitted when the last iteration of an asynchronous increase has finished
-    // and we wish to restore the original state of the UI
-    // by invoking onLastIterationFinished.
-    void lastIterationFinished();
-
 private:
     Ui::MainWindow *ui;
 

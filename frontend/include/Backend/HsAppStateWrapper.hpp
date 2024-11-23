@@ -2,8 +2,6 @@
 #define HS_APP_STATE_WRAPPER_HPP_
 
 #include "TinyHsFFI.h"
-#include "Future.hpp"
-#include "Acorn.h"
 
 /**
  * A wrapper class containing
@@ -23,24 +21,6 @@ class HsAppStateWrapper {
     // This also creates the Haskell object and fetches its pointer.
     // Beware: it assumes that the runtime has already been initalised.
     HsAppStateWrapper();
-
-    // A getter for the counter value.
-    int getCounterValue() const;
-
-    // Adds an even number to the value of the counter.
-    // Returns false if the operation has not been successful
-    // (i.e. toAdd was odd -- but we let the backend determine this).
-    bool incrementWith(int toAdd);
-
-    // On a new thread, this begins to continuously increase the value of the counter
-    // by 2 every second,
-    // for the duration given in seconds or until interrupted.
-    // Returns a Future through which we can wait for the result,
-    // which is the final state of the counter.
-    // Interruption is possible via the Future object returned.
-    Future<int> increaseContinuouslyAsync(int duration) {
-      return Future<int>([this, duration](HsPtr futurePtr){increaseContinuouslyIntegerAsyncC(appStatePtr, duration, futurePtr);});
-    }
 
     // The destructor.
     // This also runs interruptEvaluation() and frees the StablePtr

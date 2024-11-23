@@ -8,7 +8,7 @@ module Main where
 import System.Exit
 import Test.QuickCheck
 
-import Test.Haskell.Parity
+import Test.Haskell.ExampleTest
 
 -- All modules' testAll functions will be called here.
 main :: IO ()

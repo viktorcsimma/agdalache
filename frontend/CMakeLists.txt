@@ -5,12 +5,10 @@ set(PROJECT_VERSION 0.1)
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT-NAME_VERSION_MINOR 1)
 
-include(GNUInstallDirs)
-
-find_package(Catch2 3 REQUIRED)
-
 # the name of the backend project
 set(BACKEND_NAME Skeleton)
+
+include(GNUInstallDirs)
 
 # if this is compiled from the common parent project,
 # we can simply add a dependency (see later)
@@ -18,6 +16,10 @@ set(BACKEND_NAME Skeleton)
 if(NOT DEFINED NOT_TOP_LEVEL)
     find_package(${BACKEND_NAME} 0.1 REQUIRED)
 endif()
+
+# for tests
+find_package(Catch2 3 REQUIRED)
+
 
 # for Qt
 
@@ -74,6 +76,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 target_link_libraries(${PROJECT_NAME}Test PRIVATE Catch2::Catch2)
 
+
+
+############## for Haskell integration
+
 if(DEFINED NOT_TOP_LEVEL)
     add_dependencies(${PROJECT_NAME} ${BACKEND_NAME})
     add_dependencies(${PROJECT_NAME}Test ${BACKEND_NAME})
@@ -92,20 +98,6 @@ if("Windows" STREQUAL ${CMAKE_SYSTEM_NAME})
   target_link_libraries(${PROJECT_NAME} PRIVATE "${CMAKE_INSTALL_PREFIX}/../${BACKEND_NAME}/lib/Interaction.o")
   target_link_libraries(${PROJECT_NAME}Test PRIVATE "${CMAKE_INSTALL_PREFIX}/../${BACKEND_NAME}/lib/Interaction.o")
 endif()
-
-# Adding include headers
-
-target_include_directories(${PROJECT_NAME}
-                           PUBLIC
-                           "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-)
-
-target_include_directories(${PROJECT_NAME}Test
-                           PUBLIC
-                           "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-)
 
 # I don't know why, but with these options, it does not link some system libraries by itself;
 # so they need to be named explicitly.
@@ -130,6 +122,23 @@ else()
   message( FATAL_ERROR "Unsupported operating system: ${CMAKE_SYSTEM_NAME}" )
 endif()
 
+############## end of Haskell-specific tricks
+
+
+
+# Adding include headers
+
+target_include_directories(${PROJECT_NAME}
+                           PUBLIC
+                           "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
+
+target_include_directories(${PROJECT_NAME}Test
+                           PUBLIC
+                           "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
 
 # if we have assets under an "assets" directory:
 # file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

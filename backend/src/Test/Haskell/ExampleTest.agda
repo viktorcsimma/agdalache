@@ -42,8 +42,8 @@ prop_f x y = ...
 {-# FOREIGN AGDA2HS
 -- This contains all the propositions we would like to test.
 -- Actually, this will be called by main.
-parityTestAll :: IO Bool
-parityTestAll =
+exampleTestAll :: IO Bool
+exampleTestAll =
   and <$> mapM (isSuccess <$>)
   -- here you can list your tests
   -- see also QuickCheck's documentation

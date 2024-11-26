@@ -29,8 +29,9 @@ initApp : {a : Set} {{num : Num a}} -> IO (StablePtr (AppState a))
 initApp = newStablePtr =<< (MkAppState <$> newIORef 0)
 {-# COMPILE AGDA2HS initApp #-}
 
--- Now, concrete instantiations
--- which can be exported.
+-- Since `a` has a type constraint,
+-- we cannot simply export initApp
+-- without defining a concrete instance.
 initAppInteger : IO (StablePtr (AppState Integer))
 initAppInteger = initApp
 {-# COMPILE AGDA2HS initAppInteger #-}
@@ -43,6 +44,5 @@ initAppInteger = initApp
 
 {-# FOREIGN AGDA2HS
 -- And the export clauses for each function you would like to use in C/C++.
-
 foreign export ccall initAppInteger :: IO (StablePtr (AppState Integer))
 #-}

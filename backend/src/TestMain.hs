@@ -13,5 +13,9 @@ import Test.Haskell.ExampleTest
 -- All modules' testAll functions will be called here.
 main :: IO ()
 main = do
-  success <- parityTestAll
+  success <- and <$> mapM id
+               -- a list of IO Bools
+               [ exampleTestAll
+               --, ...
+               ]
   if success then exitSuccess else exitFailure

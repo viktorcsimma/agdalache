@@ -16,11 +16,12 @@ class HsAppStateWrapper {
     const HsStablePtr appStatePtr;
 
   public:
-
     // The constructor.
     // This also creates the Haskell object and fetches its pointer.
     // Beware: it assumes that the runtime has already been initalised.
     HsAppStateWrapper();
+
+    // You can write your methods here.
 
     // The destructor.
     // This also runs interruptEvaluation() and frees the StablePtr

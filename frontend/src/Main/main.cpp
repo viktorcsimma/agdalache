@@ -4,29 +4,31 @@
 #include <QLocale>
 #include <QTranslator>
 
-//#include <TinyHsFFI.h>
-
 int main(int argc, char *argv[])
 {
     // First, we initialise the Haskell runtime.
+    // TODO: we should somehow check
+    // which arguments are meant for Haskell;
+    // e.g. by using +RTS and -RTS.
     hs_init(&argc, &argv);
 
-    // We put this into a separate block so that
-    // everything gets properly destructed
-    // before the hs_exit call.
+    QApplication a(argc, argv);
+
+    QTranslator translator;
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    for (const QString &locale : uiLanguages) {
+        const QString baseName = "qt-test_" + QLocale(locale).name();
+        if (translator.load(":/i18n/" + baseName)) {
+            a.installTranslator(&translator);
+            break;
+        }
+    }
+
     int exitCode;
     {
-        QApplication a(argc, argv);
-
-        QTranslator translator;
-        const QStringList uiLanguages = QLocale::system().uiLanguages();
-        for (const QString &locale : uiLanguages) {
-            const QString baseName = "qt-test_" + QLocale(locale).name();
-            if (translator.load(":/i18n/" + baseName)) {
-                a.installTranslator(&translator);
-                break;
-            }
-        }
+        // We put this into a separate block so that
+        // every Haskell object gets properly destructed
+        // before the hs_exit call.
 
         // By constructing the main window,
         // the MainViewModel and HsCalcStateWrapper instances

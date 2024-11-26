@@ -15,15 +15,9 @@ custom-setup
   setup-depends:
     base     >= 4.13    && < 4.20,
     Cabal    >= 2.2,
-    -- this is my custom version of agda2hs; see cabal.project
-    -- agda2hs,
     process
 
 library
-  -- it only searches online and not among local packages;
-  -- which is ugly because I use the version on my own machine
-  -- so I'll just comment this out for now
-  -- build-depends:       agda2hs >= 1.3 && < 2.0
   build-depends:       base     >= 4.13    && < 4.20,
                        containers,
                        text,
@@ -61,10 +55,6 @@ library
 executable Shell
   hs-source-dirs:      src
   main-is:             Main.hs
-  -- it only searches online and not among local packages;
-  -- which is ugly because I use the version on my own machine
-  -- so I'll just comment this out for now
-  -- build-depends:       agda2hs >= 1.3 && < 2.0,
   build-depends:       base     >= 4.13    && < 4.20,
                        containers,
                        text,

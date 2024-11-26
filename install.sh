@@ -43,19 +43,54 @@ done
 
 cd "$SDK_PATH"
 
+
 # installing GHC
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+echo "Do you want to install the latest version of GHC?"
+echo "You can skip this if you already have a recent version installed."
+echo -n "[y/n] (default n) "
+read yesorno
+if [ "y" != "$yesorno" -a "Y" != "$yesorno" ]; then
+    echo "GHC install skipped."
+else
+    echo "Follow the instructions of the GHCup install script."
+    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+fi
+
 
 # installing agda2hs
-git clone https://github.com/viktorcsimma/agda2hs
-cd agda2hs
-git checkout have-it-both-ways
-~/.ghcup/bin/cabal install --overwrite-policy=always
 
-# this is needed in Qt component names
-# e.g. 673 for 6.7.3
-version_without_dots=`echo "$QT_VERSION" | sed 's/\.//g'`
+echo "Do you want to install the custom version of agda2hs needed?"
+echo "You probably want this, as the vanilla agda2hs compiler does not work."
+echo -n "[y/n] (default y) "
+read yesorno
+if [ "n" = "$yesorno" -o "N" = "$yesorno" ]; then
+    echo "agda2hs install skipped."
+else
+    git clone https://github.com/viktorcsimma/agda2hs
+    cd agda2hs
+    git checkout have-it-both-ways
+    ~/.ghcup/bin/cabal install --overwrite-policy=always
+fi
 
-curl --proto '=https' --tlsv1.2 -sSf https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-online-installer-linux-x64-4.8.1.run > '/tmp/qt.run'
-chmod u+x /tmp/qt.run
-/tmp/qt.run --root "$SDK_PATH/Qt" --no-default-installations --accept-licenses install "qt.qt6.${version_without_dots}.linux_gcc_64" "qt.qt6.${version_without_dots}.qtwaylandcompositor" "qt.tools.ninja" "qt.tools.cmake" "qt.tools.qtcreator_gui"
+
+# installing Qt
+echo "Do you want to install Qt?"
+echo "You can skip this if you already have a GCC-compiled version installed."
+echo -n "[y/n] (default n) "
+read yesorno
+if [ "y" != "$yesorno" -a "Y" != "$yesorno" ]; then
+    echo "Qt install skipped."
+else
+    echo "Follow the instructions of the Qt installer."
+    # this is needed in Qt component names
+    # e.g. 673 for 6.7.3
+    version_without_dots=`echo "$QT_VERSION" | sed 's/\.//g'`
+
+    curl --proto '=https' --tlsv1.2 -sSf https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-online-installer-linux-x64-4.8.1.run > '/tmp/qt.run'
+    chmod u+x /tmp/qt.run
+    /tmp/qt.run --root "$SDK_PATH/Qt" --no-default-installations --accept-licenses install "qt.qt6.${version_without_dots}.linux_gcc_64" "qt.qt6.${version_without_dots}.qtwaylandcompositor" "qt.tools.ninja" "qt.tools.cmake" "qt.tools.qtcreator_gui"
+fi
+
+echo "All is done!"
+

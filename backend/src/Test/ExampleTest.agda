@@ -19,6 +19,6 @@ open import Logic
 -- by the typechecker.
 -- For example:
 {-
-test1 : f 2 -10 ≡ -8
+@0 test1 : f 2 10 ≡ 8
 test1 = refl
 -}

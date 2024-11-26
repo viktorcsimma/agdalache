@@ -6,6 +6,8 @@
 // Here you can add Catch2 tests, for example for the HsAppStateWrapper,
 // but actually for any backend and view model class.
 
+// See the documentation of Catch2.
+
 /*
 TEST_CASE("...") {
     ...

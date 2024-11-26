@@ -10,10 +10,6 @@ module All where
 -- then import all modules you want to get compiled
 -- in Haskell.
 
-
--- This command helped (ran in src):
--- find . -name '*.agda' | sed 's/\.\///g' | sed 's/\.agda//g' | sed 's/\//\./g' | sed 's/^/import /g'
-
 import AppState
 import Interaction
 import Logic
@@ -23,19 +19,18 @@ import Tool.Cheat
 import Tool.PropositionalEquality
 import Tool.Relation
 import Tool.Future
--- the tests;
+
+-- The tests;
 -- they only get here to be checked by the typechecker,
--- but we do not want GHC to compile the empty files generated
+-- but we do not want GHC to compile the empty files generated.
 import Test.ExampleTest
 import Test.Haskell.ExampleTest
 
--- this does not have a .agda file
--- import Platform
 import Platform.Win32
 import Platform.Posix
 
--- And now, we also copy them into the Haskell source;
--- this way, we can compile everything by compiling All.hs.
+-- And now, the modules for which there is a Haskell cognate
+-- that we want to compile.
 {-# FOREIGN AGDA2HS
 {-# LANGUAGE CPP #-}
 import AppState
@@ -44,8 +39,8 @@ import Logic
 
 import Tool.ErasureProduct
 import Tool.Future
--- import Tool.Cheat                    -- this would be empty
--- import Tool.PropositionalEquality    -- this would be empty
+-- import Tool.Cheat                    -- this is empty
+-- import Tool.PropositionalEquality    -- this is empty
 import Platform
 -- This cannot be put here; CMake's GHC would search for QuickCheck.
 -- import Test.Haskell.ExampleTest

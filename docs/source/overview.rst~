@@ -1,6 +1,8 @@
-************************
-Welcome to the Agda SDK!
-************************
+.. _overview:
+
+*********************
+What is the Agda SDK?
+*********************
 
 The Agda SDK is a project intended to help developers
 utilising Agda-powered, provably correct backends
@@ -20,18 +22,4 @@ However, frontend developers can join the C++ part of your project,
 even with no knowledge of Agda at all!
 
 Check out the chapter **Getting started** to install the SDK
-and **Structure** for more details.
-Or alternatively, see an **example project** (https://github.com/viktorcsimma/skeleton/tree/even-counter)
-for getting an idea
-(it is about manipulating a counter that can provably contain only even values).
-
-.. toctree::
-
-   getting-started
-   structure/root
-   structure/backend/index
-   structure/frontend/index
-   structure/futures
-   compilation
-   troubleshooting
-   contributions
+and **Tutorial** to get a basic idea of how to use it.

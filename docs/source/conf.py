@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'The Agda SDK'
+copyright = '2024, Viktor Csimma'
+author = 'Viktor Csimma'
 
 release = '0.1'
 version = '0.1.0'

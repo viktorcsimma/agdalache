@@ -28,10 +28,7 @@ for getting an idea
 .. toctree::
 
    getting-started
-   structure/root
-   structure/backend/index
-   structure/frontend/index
-   structure/futures
+   structure/index
    compilation
    troubleshooting
    contributions

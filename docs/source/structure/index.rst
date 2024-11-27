@@ -7,4 +7,9 @@ Structure
 This section describes the structure of an Agda SDK project
 and the most important files in it.
 
-toc
+.. toctree::
+
+   root
+   backend/index
+   frontend/index
+   futures

@@ -1,3 +1,5 @@
+.. _frontend-cmake:
+
 ***********************
 The CMake project files
 ***********************

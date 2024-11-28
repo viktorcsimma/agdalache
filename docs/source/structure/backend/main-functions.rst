@@ -1,3 +1,5 @@
+.. _backend-main-functions:
+
 **************
 Main functions
 **************
@@ -16,6 +18,6 @@ you can simply ignore it
 and remove it as targets from the project files.
 
 TestMain.hs is for QuickCheck-based Haskell tests
-runnable via `cabal test`.
-See the section about testing
+runnable via ``cabal test``.
+See the :ref:`backend-testing`
 for more information.

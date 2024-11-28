@@ -1,3 +1,5 @@
+.. _backend-interface:
+
 *****************
 Backend interface
 *****************
@@ -38,13 +40,13 @@ Asynchronous calls returning futures have a C type signature like ::
 
   void addValueAsyncC(HsStablePtr appStatePtr, int value, HsPtr futurePtr)
 
-This (assuming the Future stands for a `Future CInt`) can be translated to something like ::
+This (assuming the Future stands for a ``Future CInt``) can be translated to something like ::
 
   Future<int> addValueAsync(int value) {
     return Future<int>([this, value](HsPtr futurePtr){addValueAsyncC(appStatePtr, value, futurePtr);});
   }
 
-The destructor frees the StablePtr with `hs_free_stable_ptr`
+The destructor frees the StablePtr with ``hs_free_stable_ptr``
 (included in the GHC runtime);
 this way, an expensive foreign call can be avoided.
 But you can also extend the destructor
@@ -53,4 +55,4 @@ according to your needs.
 Future
 ------
 
-See the section on futures for more details.
+See the section on :ref:`futures` for more details.

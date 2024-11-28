@@ -1,3 +1,5 @@
+.. _backend-testing:
+
 *******
 Testing
 *******
@@ -17,7 +19,7 @@ therefore, no .hs file gets generated
 (and so it should not be added to Haskell imports in All.agda).
 
 Agda provides a tool that not many other languages do:
-the use of propositional equality (`_≡_`)
+the use of propositional equality (``_≡_``)
 enables the typechecker to check propositions
 even before compilation.
 For example::
@@ -25,7 +27,7 @@ For example::
   @0 test : f 2 10 ≡ 8
   test = refl
 
-If Agda itself can calculate `f 2 10` and finds it to be equal to `8`,
+If Agda itself can calculate ``f 2 10`` and finds it to be equal to ``8``,
 then this compiles; otherwise, you get an error message.
 
 The disadvantage of this approach is that you need very concrete values
@@ -68,7 +70,7 @@ At the end of the file, we have to list all our propositions in a foreign pragma
     ]
   #-}
 
-In turn, `exampleTestAll` (or whatever we name it)
+In turn, ``exampleTestAll`` (or whatever we name it)
 should be called by the main function in src/TestMain.hs::
 
   main :: IO ()
@@ -84,5 +86,4 @@ If you need to generate random inputs of types
 other than some basic Haskell types,
 you might need to define an Arbitrary instance
 for the given type.
-See the documentation of QuickCheck for more details:
-https://hackage.haskell.org/package/QuickCheck.
+See the `documentation of QuickCheck <https://hackage.haskell.org/package/QuickCheck>`_ for more details.

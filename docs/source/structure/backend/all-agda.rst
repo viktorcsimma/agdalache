@@ -61,9 +61,9 @@ Where to include what?
   and you want to get checked
   by the Agda typechecker.
   Pretty much, this means every Agda file you add.
-  Only modules that are already written in `.hs` files
+  Only modules that are already written in ``.hs`` files
   should be excluded
-  (like `Platform` in the skeleton).
+  (like ``Platform`` in the skeleton).
 * Add a Haskell import for modules
   you want to run GHC on.
   This means you should omit Agda modules
@@ -75,7 +75,7 @@ Where to include what?
   under the Tool directory.
   However, you *should* add modules
   pre-written in Haskell
-  (like `Platform.hs`).
+  (like ``Platform.hs``).
 
 Actually, if an Agda import contains further Agda imports,
 you need not include them in All.agda;

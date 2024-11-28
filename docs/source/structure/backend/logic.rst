@@ -1,3 +1,5 @@
+.. _logic:
+
 ******************************
 Writing business logic in Agda
 ******************************
@@ -20,8 +22,8 @@ as well as to All.agda and .cabal.
 
 In order to write agda2hs-compatible proofs,
 it is essential to understand the concept
-of erasure in Agda (https://agda.readthedocs.io/en/latest/language/runtime-irrelevance.html)
-as well as the abilities of agda2hs itself (https://agda.github.io/agda2hs/).
+of `erasure in Agda <https://agda.readthedocs.io/en/latest/language/runtime-irrelevance.html>`_
+as well as the abilities of `agda2hs <https://agda.github.io/agda2hs/>`_ itself.
 
 Using Haskell functions
 -----------------------
@@ -32,7 +34,7 @@ available in Haskell but not in Agda
 or in order to avoid having to reimplement
 a complex pre-existing code).
 
-Generally, it is a good idea to import `Haskell.Prelude` and `Haskell.Prim`,
+Generally, it is a good idea to import ``Haskell.Prelude`` and ``Haskell.Prim``,
 as they include many of the tools you would expect
 from an ordinary Haskell environment.
 If this does not solve your problem,
@@ -51,8 +53,8 @@ they will, at run-time, act exactly the same way.
 However, not all related functions may be available;
 and often, corresponding laws (to be used for proofs) are missing.
 (In this case, if you have time, a PR is welcome!
-Just make sure you make it against the `have-it-both-ways`
-of `viktorcsimma/agda2hs`,
+Just make sure you make it against the ``the-agda-sdk``
+of ``viktorcsimma/agda2hs``,
 as this is the version of the compiler included.)
 
 If there is no appropriate pre-made solution,
@@ -61,8 +63,8 @@ to make the definition an Agda postulate
 and then include the real definition in a foreign pragma.
 
 For example,
-to use the type `Complex` and the function `realPart :: Complex a -> a`
-from the Haskell module `Data.Complex`::
+to use the type ``Complex`` and the function ``realPart :: Complex a -> a``
+from the Haskell module ``Data.Complex``::
 
   {-# FOREIGN AGDA2HS
   import qualified Data.Complex

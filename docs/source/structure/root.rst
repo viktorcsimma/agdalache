@@ -1,4 +1,4 @@
-.. _root:
+.. _project_root:
 
 ************
 Project root
@@ -23,7 +23,7 @@ In CMakeLists.txt,
 you can set the version numbers and the name of the global project.
 Otherwise, it is an ordinary CMake project file.
 
-The <project-name>.agda-lib file
+The ``<project-name>.agda-lib`` file
 serves for initialising the backend
 as an Agda library.
 This contains the name Agda is going to see

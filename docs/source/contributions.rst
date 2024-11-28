@@ -1,3 +1,5 @@
+.. _contributions:
+
 *************
 Contributions
 *************
@@ -5,7 +7,8 @@ Contributions
 Contributions are very welcome!
 You can help improve any part of the SDK,
 including:
-* agda2hs (both the compiler itself and the library) -- but for this, make a PR to the `have-it-both-ways` branch of `viktorcsimma/agda2hs`;
+
+* agda2hs (both the compiler itself and the library) -- but for this, make a PR to the ``the-agda-sdk`` branch of ``github.com/viktorcsimma/agda2hs``;
 * the build files (CMake, Cabal etc.);
 * the folder structure;
 * the tools included (either the Agda/Haskell or the C/C++ ones);

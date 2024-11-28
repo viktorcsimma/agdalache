@@ -1,17 +1,19 @@
+.. _frontend-main-function:
+
 *************
 Main function
 *************
 
 The main function of the application is
-in `frontend/src/Main/main.cpp`.
+in ``frontend/src/Main/main.cpp``.
 It is an ordinary Qt main function,
 but it also initialises the Haskell runtime
-by calling `hs_init`
-and shutting it down gracefully via `hs_exit`.
+by calling ``hs_init``
+and shutting it down gracefully via ``hs_exit``.
 
 Also, the objects containing Haskell references
 should be constructed in a new block
-before the `hs_exit` call.
+before the ``hs_exit`` call.
 This is because at that point,
 every Haskell object should be
 properly de-initialised;

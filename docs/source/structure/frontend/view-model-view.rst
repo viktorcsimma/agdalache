@@ -1,3 +1,5 @@
+.. _view-model-view:
+
 ****************
 View model, view
 ****************
@@ -9,9 +11,9 @@ View model
 
 The MainViewModel class included in the skeleton file contains a HsAppStateWrapper pointer. This automatically gets initialised on construction and deleted on destruction.
 
-Here, you should add the members and methods you would usually include in an MVVM view model. For example, if you are to have a programatically controlled label in the view, you can add an `std::string` member to the view model and a getter for getting its content; this will correspond to the content of the label.
+Here, you should add the members and methods you would usually include in an MVVM view model. For example, if you are to have a programatically controlled label in the view, you can add an ``std::string`` member to the view model and a getter for getting its content; this will correspond to the content of the label.
 
-For utilising Futures, there is an example implementation using an `std::thread` and a Future pointer to handle them safely and easily. See the section on Futures to learn more.
+For utilising Futures, there is an example implementation using an ``std::thread`` and a Future pointer to handle them safely and easily. See the section on :ref:`futures` to learn more.
 
 View
 ----

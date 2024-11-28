@@ -25,13 +25,13 @@ and cabal repl loads everything into a GHCi instance
 so that you can debug live.
 
 For more information on Cabal,
-see its documentation: https://cabal.readthedocs.io/en/3.4/index.html.
+see `its documentation <https://cabal.readthedocs.io/en/3.4/index.html>`_.
 
 An ASDK backend is also a Cabal project by its own right:
 it can be compiled and installed like any ordinary Cabal project.
-For this, we need a _project description_ <project-name>.cabal.
+For this, we need a *project description* ``<project-name>.cabal``.
 
-The syntax is detailed at https://cabal.readthedocs.io/en/3.4/cabal-package.html#package-descriptions. Here, we only cover the ASDK-specific tweaks.
+The syntax is detailed at the `corresponding part of the Cabal documentation <https://cabal.readthedocs.io/en/3.4/cabal-package.html#package-descriptions>`_. Here, we only cover the ASDK-specific tweaks.
 
 Cabal is tricked into compiling Agda files
 by running a custom Setup.hs file,
@@ -83,6 +83,7 @@ and then get them to create a C++-compatible binary object.
 For more information, see the comments in the file itself.
 
 What you might need to know:
+
 * The backend project name is defined at the top.
   To change this, however,
   you also need to rename <ProjectName>ConfigVersion.cmake
@@ -103,7 +104,7 @@ What you might need to know:
 Agda
 ----
 
-<project-name>.agda-lib is, again, a file defining an Agda library.
+``<project-name>.agda-lib`` is, again, a file defining an Agda library.
 It is useful if you also want to use the backend
 as a library importable by other Agda projects.
 

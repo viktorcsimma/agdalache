@@ -1,5 +1,9 @@
 .. _frontend:
 
+********
+Frontend
+********
+
 .. toctree::
 
    cmake

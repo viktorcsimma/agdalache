@@ -1,8 +1,10 @@
+.. _frontend-testing:
+
 *******
 Testing
 *******
 
-Under `frontend/src/Test`, you can add any Catch2 tests.
+Under ``frontend/src/Test``, you can add any Catch2 tests.
 Catch2 is a C++ testing framework
 for writing runtime checks easily.
 
@@ -18,4 +20,4 @@ as a dependency for the test target::
   target_sources(${PROJECT_NAME}Test PRIVATE main.cpp Test1.cpp Test2.cpp ...)
 
 For details on how to write the tests themselves,
-see the Catch2 documentation: https://github.com/catchorg/Catch2/tree/devel/docs.
+see the `Catch2 documentation <https://github.com/catchorg/Catch2/tree/devel/docs>`_.

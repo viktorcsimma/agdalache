@@ -31,7 +31,7 @@ while (-not($is_done)) {
 cd "$SDK_PATH"
 git clone "https://github.com/viktorcsimma/agda2hs"
 cd agda2hs
-git checkout have-it-both-ways
+git checkout the-agda-sdk
 cabal install --overwrite-policy=always
 
 

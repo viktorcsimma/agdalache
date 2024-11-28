@@ -69,7 +69,7 @@ if [ "n" = "$yesorno" -o "N" = "$yesorno" ]; then
 else
     git clone https://github.com/viktorcsimma/agda2hs
     cd agda2hs
-    git checkout have-it-both-ways
+    git checkout the-agda-sdk
     ~/.ghcup/bin/cabal install --overwrite-policy=always
 fi
 

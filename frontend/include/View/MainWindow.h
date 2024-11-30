@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
 public:
     // This also creates the view model.
     MainWindow(QWidget *parent = nullptr);
-    // This also destructs the view model.
+    // This also destroys the view model.
     ~MainWindow();
 
 private:

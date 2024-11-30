@@ -1,6 +1,6 @@
 target_sources(
     ${PROJECT_NAME}
-    PRIVATE HsAppStateWrapper.hpp Future.hpp
+    PRIVATE HsAppStateWrapper.hpp Future.hpp TriggerFuture.hpp
 )
 target_sources(
     ${PROJECT_NAME}Test

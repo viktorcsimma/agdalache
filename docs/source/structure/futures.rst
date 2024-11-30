@@ -192,13 +192,13 @@ There are 3 boolean flags showing the current status:
 
 Make sure that before destruction, the Future has either been queried or interrupted. Otherwise, in order to avoid leaks and zombie threads, an error message is shown and ``std::terminate()`` is called, similarly to how ``std::thread`` instances have to be either detached or joined before destruction.
 
-For the time being, the only instantiation of the template is for `int`; if you need more, please add a new getter to Future.agda, export it and define a new instantiation of haskellGet() which calls on it.
+For the time being, the only instantiation of the template is for `int`; if you need more, please add a new getter to Future.agda, export it and define a new instantiation of ``haskellGet()`` which calls on it.
 
 Triggering actions on results
 -----------------------------
 
 The method to be described here is that
-we store both an `std::thread˙ and the `Future<int>˙ itself
+we store both an ``std::thread`` and the ``Future<int>`` itself
 in an object,
 and inside the thread, we wait for the result and execute the triggers on it.
 The advantage of this approach is that
@@ -206,68 +206,21 @@ we immediately get a notification on completion
 (and can run triggers on it, e.g. emit a Qt signal)
 while still being able to interrupt the calculation from outside.
 
-The following class definition
-gives a concrete example::
+The idea is embedded in a class
+called ``TriggerFuture``.
+This cannot be awaited by itself,
+but can be given a vector of functions
+to be called as triggers on completion.
 
-  class MyViewModel {
-    private:
-
-      // ...
-
-      // Points to the actual interruptible calculation, if any.
-      Future<int>* actualFuture;
-
-      // A mutex embedded in the object.
-      std::mutex mutex;
-
-      // The thread on which we will run the get() calls and the triggers.
-      std::thread triggerThread;
-
-    public:
-
-      // ...
-
-      void methodAsync(std::vector<std::function<void(int)>> triggers, ...) {
-          triggerThread = new std::thread([=]() {
-              try {
-                  actualFuture = new Future<int>(...);
-                  int result = actualFuture->get();
-
-                  // we lock only here
-                  std::unique_lock lock(mutex);
-
-                  for (auto t: triggers) t(result);
-
-                  // we have to avoid double deletes,
-                  // as there might have been an interrupt
-                  if (nullptr != actualFuture) {
-                      delete actualFuture;
-                      actualFuture = nullptr;
-                  }
-              } catch (InterruptedFutureException()) {}
-          });
-      }
-
-      // The return value means
-      // whether there has really been a calculation to interrupt.
-      bool interrupt() {
-          std::unique_lock lock(mutex);
-          if (nullptr == actualFuture) return false;
-          else {
-              actualFuture->interrupt();
-              // wait until the thread stops gracefully
-              if (triggerThread.joinable()) triggerThread.join();
-              // we have to avoid double deletes
-              if (nullptr != actualFuture) {
-                  delete actualFuture;
-                  actualFuture = nullptr;
-              }
-              return true;
-          }
-      }
-
-      // ...
-  }
-
-Feel free to copy this code template
-if you think it could help you.
+Chaining futures
+(i.e. spawning a new one on completion of a previous one)
+has not yet been solved in general.
+Note that this might be problematic to solve with triggers,
+as when deleting the previous future,
+the very function object being executed
+would be deleted as well.
+For now, the simplest option may be
+running normal futures from an ``std::thread``
+within a for-loop;
+see the `MainViewModel class <https://github.com/viktorcsimma/skeleton/blob/even-counter/frontend/src/ViewModel/MainViewModel.cpp>`_ from the example project
+for an example.

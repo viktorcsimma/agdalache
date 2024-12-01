@@ -86,11 +86,11 @@ What you might need to know:
 
 * The backend project name is defined at the top.
   To change this, however,
-  you also need to rename <ProjectName>ConfigVersion.cmake
-  and replace the name in Config.cmake.in.
+  you also need to rename ``<ProjectName>ConfigVersion.cmake``
+  and replace the name in ``Config.cmake.in``.
 * The default configuration creates
-  a static library lib<ProjectName>.a
-  and an executable <ProjectName>Shell.
+  a static library ``lib<ProjectName>.a``
+  and an executable ``<ProjectName>Shell``.
   You can rename these, if you want.
 * Installation makes the library and the executable
   available globally on the machine.

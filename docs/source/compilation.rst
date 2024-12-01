@@ -16,7 +16,7 @@ you can simply use the usual commands:
 and ``cabal run`` for running the executable (if you have one).
 QuickCheck tests can be run with ``cabal test``.
 
-See also the `documentation <https://www.haskell.org/cabal/>`_ of Cabal) for details.
+See also the `documentation <https://www.haskell.org/cabal/>`_ of Cabal for details.
 
 CMake
 -----

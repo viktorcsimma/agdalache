@@ -15,5 +15,5 @@ including:
 * and, of course, this documentation.
 
 If you have questions, reach out anytime at
-[csimmaviktor03] [at] [<the-most-popular-online-email-provider>.com].
+[csimmaviktor03] [at] [<the-mail-service-of-google>.com].
 I would definitely be thrilled to hear from you:)

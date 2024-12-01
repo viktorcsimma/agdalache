@@ -4,6 +4,8 @@
 Backend interface
 *****************
 
+.. highlight:: cpp
+
 The SDK already includes some classes that help you interact with the backend from C++.
 
 HsAppStateWrapper

@@ -4,6 +4,8 @@
 Main function
 *************
 
+.. highlight:: cpp
+
 The main function of the application is
 in ``frontend/src/Main/main.cpp``.
 It is an ordinary Qt main function,

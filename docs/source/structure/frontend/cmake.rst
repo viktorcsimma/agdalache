@@ -15,7 +15,7 @@ The name of the frontend project as well as that of the imported backend project
 can be changed at the top of the file.
 
 If you run CMake directly for the frontend CMakeLists
-(i.e. NOT_TOP_LEVEL is not defined),
+(i.e. ``NOT_TOP_LEVEL`` is not defined),
 it will look for a globally installed backend library;
 use this if you want to write a frontend for an existing backend.
 If run for the project root, however,

@@ -4,6 +4,8 @@
 Backend API
 ***********
 
+.. highlight:: agda
+
 Unless you only need a console application with no C++ frontend whatsoever,
 you will have to write a public interface
 through which the frontend can use the backend --
@@ -62,7 +64,7 @@ after running a build through CMake,
 you find all the stubs under ``backend/build/stub``.
 However, for these to work,
 you need to copy them into backend/include
-and **add ``#include TinyHsFFI.h``**.
+and **add** ``#include TinyHsFFI.h``.
 The reason for this is that
 this header contains the type synonyms
 that Haskell uses.

@@ -19,5 +19,5 @@ and remove it as targets from the project files.
 
 TestMain.hs is for QuickCheck-based Haskell tests
 runnable via ``cabal test``.
-See the :ref:`backend-testing`
+See :ref:`backend-testing`
 for more information.

@@ -4,6 +4,8 @@
 Mutable app states
 ******************
 
+.. highlight:: agda
+
 In some cases, you simply need to write a single function in Agda,
 prove its correctness and then call it from C or C++.
 Often, however, there is a need to verify an entire backend.
@@ -45,7 +47,7 @@ IORefs are needed because from the C side, it is easier to have an object reacha
 StablePtrs
 ----------
 
-A StablePtr is like a pointer that you can pass to a C function. Later, if the C function passes it back to another Haskell call, you can retrieve the original object there. (The same is not true for an ordinary Ptr, because there, the Haskell runtime might move the object anywhere in the memory at any time.) [#]
+A StablePtr is like a pointer that you can pass to a C function. Later, if the C function passes it back to another Haskell call, you can retrieve the original object there. (The same is not true for an ordinary Ptr, because there, the Haskell runtime might move the object anywhere in the memory at any time.)[1]_
 
 Therefore, creating a StablePtr for an AppState object and passing it to C is a nice way to keep a hold of the backend. You can then modify Agda/Haskell functions to accept StablePtrs instead of the AppStates themselves, enabling them to be exported to C. The tools ``stablePtrise``, ``stablePtrise2`` and ``stablePtrise3`` in Tool.Foreign can make this easier.
 

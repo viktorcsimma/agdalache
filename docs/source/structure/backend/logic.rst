@@ -4,6 +4,8 @@
 Writing business logic in Agda
 ******************************
 
+.. highlight:: agda
+
 By default, you can write your business logic and the proofs belonging to it
 into Logic.agda;
 however, you are free to create any new Agda source files

@@ -4,6 +4,8 @@
 Futures
 *******
 
+.. highlight:: agda
+
 The Agda SDK contains a new, innovative way to run Agda/Haskell calculations in the background
 and retrieve their results later:
 it is based on the Future data structure and class,

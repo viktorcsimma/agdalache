@@ -4,6 +4,8 @@
 The All.agda file
 *****************
 
+.. highlight:: agda
+
 The All.agda file
 (located in backend/src)
 contains the Agda and Haskell modules

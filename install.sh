@@ -5,6 +5,8 @@
 # Installs GHCup, agda2hs and Qt with the necessary libraries and options
 # into a directory provided by the user.
 
+echo -e "Please note that this script has only been tested for Ubuntu; it probably works for other Debian-based distributions.\n"
+
 # NOTE: for me, this was needed for Qt:
 echo "Make sure you have the correct version of libclang installed (libclang-17-dev for Ubuntu 20.04 and libclang-18-dev for Ubuntu 24.04)."
 echo -n "Press Enter to continue."

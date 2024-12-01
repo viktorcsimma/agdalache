@@ -75,7 +75,7 @@ runInterruptibly tid action resultOnInterrupt = do
       return result
     -- in this case, the watcher thread has already run
     -- and stopped the calculation thread
-    Nothing -> return resultOnInterrupt
+    Nothing -> resultOnInterrupt
 
 
 -- Poll the event until it gets signalled.

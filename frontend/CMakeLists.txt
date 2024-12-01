@@ -95,8 +95,15 @@ endif()
 # See my own question at
 # https://stackoverflow.com/questions/78260754/ghc-libraries-with-ffi-on-windows-have-foreign-export-symbols-missing.
 if("Windows" STREQUAL ${CMAKE_SYSTEM_NAME})
-  target_link_libraries(${PROJECT_NAME} PRIVATE "${CMAKE_INSTALL_PREFIX}/../${BACKEND_NAME}/lib/Interaction.o")
-  target_link_libraries(${PROJECT_NAME}Test PRIVATE "${CMAKE_INSTALL_PREFIX}/../${BACKEND_NAME}/lib/Interaction.o")
+    if(DEFINED NOT_TOP_LEVEL)
+        set(INTERACTION_O_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/../backend/build/o")
+    else()
+        set(INTERACTION_O_PREFIX "${CMAKE_INSTALL_PREFIX}/../${BACKEND_NAME}/lib")
+    endif()
+  target_link_libraries(${PROJECT_NAME} PRIVATE "${INTERACTION_O_PREFIX}/Interaction.o")
+  target_link_libraries(${PROJECT_NAME}Test PRIVATE "${INTERACTION_O_PREFIX}/Interaction.o")
+  target_link_libraries(${PROJECT_NAME} PRIVATE "${INTERACTION_O_PREFIX}/Tool/Future.o")
+  target_link_libraries(${PROJECT_NAME}Test PRIVATE "${INTERACTION_O_PREFIX}/Tool/Future.o")
 endif()
 
 # I don't know why, but with these options, it does not link some system libraries by itself;

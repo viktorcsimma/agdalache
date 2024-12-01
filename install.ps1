@@ -4,6 +4,7 @@
 # The original working directory (we'll switch here back in the end):
 $ORIGINAL_PWD = $PWD
 
+
 # GHCup
 Set-ExecutionPolicy Bypass -Scope Process -Force;[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; try { & ([ScriptBlock]::Create((Invoke-WebRequest https://www.haskell.org/ghcup/sh/bootstrap-haskell.ps1 -UseBasicParsing))) -Interactive -DisableCurl } catch { Write-Error $_ }
 
@@ -27,13 +28,11 @@ while (-not($is_done)) {
         $is_done = $true
     }
 }
-
 cd "$SDK_PATH"
 git clone "https://github.com/viktorcsimma/agda2hs"
 cd agda2hs
 git checkout the-agda-sdk
 cabal install --overwrite-policy=always
-
 
 # adding the agda2hs library to the Agda type checker
 mkdir "$HOME\AppData\Roaming\agda"

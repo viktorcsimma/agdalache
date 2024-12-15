@@ -4,10 +4,41 @@
 Getting started
 ***************
 
+.. highlight:: sh
+
 Installation
 ------------
 
-.. highlight:: sh
+Via apt
+^^^^^^^
+
+The Agda SDK is available as an ``apt`` repo! For installing from there, issue these commands::
+
+  echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/csimmaviktor.gpg] http://fwc.horcsin.hu:8888/ unstable main' | sudo tee /etc/apt/sources.list.d/agdasdk.list
+  curl -fsSL https://csimmaviktor.web.elte.hu/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/csimmaviktor.gpg
+  sudo apt update
+  sudo apt install agdasdk
+
+Afterwards, you should add the agda2hs library to your ``AGDA_LIB/libraries`` file (see details `here <(https://agda.readthedocs.io/en/v2.6.4.3/tools/package-system.html>`_). So, for Linux::
+
+  mkdir -p ~/.config/agda
+  echo "/usr/share/x86_64-linux-ghc-9.4.8/Agda-2.6.4.3/lib/prim/agda-builtins.agda-lib
+  /usr/share/agda2hs/agda2hs.agda-lib" | tee -a ~/.config/agda/libraries
+
+For configuring Emacs, you don't need to install an Agda instance; simply copy this to your ``.emacs`` file::
+
+  (load-file (let ((coding-system-for-read 'utf-8))
+                  (shell-command-to-string "agda-mode locate")))
+  (custom-set-variables
+   '(agda2-program-name "agda2hs")
+  )
+
+  (require 'package)
+  (package-initialize)
+
+
+Via the installation scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The installation scripts can be found in the repo itself
 (which you will probably want to use).
@@ -27,7 +58,7 @@ So, to install this kit, do the following:
 
 Or you can also fork the repo on GitHub and work on your fork from then on.
 * Switch to the root of the repo with ``cd``.
-* Run the appropriate installation script: ``sh install.sh`` on Linux and ``something with PowerShell`` on Windows. (For the latter, you might need to modify some security settings in order for this to work.)
+* Run the appropriate installation script: ``sh install.sh`` on Linux or the PowerShell script on Windows. (For the latter, you might need to modify some security settings in order for this to work.)
 And you are now set and done!
 
 Alternatively, you can also download the tools yourself. In this case, make sure you have

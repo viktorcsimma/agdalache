@@ -111,8 +111,8 @@ endif()
 if("Linux" STREQUAL ${CMAKE_SYSTEM_NAME} OR "Darwin" STREQUAL ${CMAKE_SYSTEM_NAME})
   target_link_options(${PROJECT_NAME} PRIVATE -no-pie)
   target_link_options(${PROJECT_NAME}Test PRIVATE -no-pie)
-  target_link_libraries(${PROJECT_NAME} PRIVATE dl pthread gmp)
-  target_link_libraries(${PROJECT_NAME}Test PRIVATE dl pthread gmp)
+  target_link_libraries(${PROJECT_NAME} PRIVATE dl pthread gmp numa ffi)
+  target_link_libraries(${PROJECT_NAME}Test PRIVATE dl pthread gmp numa ffi)
   if(CMAKE_BUILD_TYPE MATCHES RELEASE)
       # we tell the dynamic linker to search for shared libraries in the folder of the executable itself
       # this way, we can bundle the remaining libraries with the application

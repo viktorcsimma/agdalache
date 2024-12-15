@@ -19,10 +19,12 @@ Cabal is one of the standard package managers for Haskell
 (the other being Haskell).
 It, however, is also a build system,
 with various options:
-cabal install installs the project globally,
-cabal run builds it in place and runs the main function,
-and cabal repl loads everything into a GHCi instance
+``cabal install`` installs the project globally,
+``cabal run`` builds it in place and runs the main function,
+and ``cabal repl`` loads everything into a GHCi instance
 so that you can debug live.
+QuickCheck tests can be run
+by calling ``cabal test``.
 
 For more information on Cabal,
 see `its documentation <https://cabal.readthedocs.io/en/3.4/index.html>`_.
@@ -31,7 +33,7 @@ An ASDK backend is also a Cabal project by its own right:
 it can be compiled and installed like any ordinary Cabal project.
 For this, we need a *project description* ``<project-name>.cabal``.
 
-The syntax is detailed at the `corresponding part of the Cabal documentation <https://cabal.readthedocs.io/en/3.4/cabal-package.html#package-descriptions>`_. Here, we only cover the ASDK-specific tweaks.
+The syntax is detailed at the `corresponding part of the Cabal documentation <https://cabal.readthedocs.io/en/3.4/cabal-package.html#package-descriptions>`_. Here, we only cover ASDK-specific tweaks.
 
 Cabal is tricked into compiling Agda files
 by running a custom Setup.hs file,
@@ -45,7 +47,7 @@ However, as this is a less-than-usual use case for Cabal,
 some ugly solutions have to be applied.
 
 * extra-source-files must contain all the Agda files,
-  and unfortunately, wildcards (*) do not include directories.
+  and unfortunately, wildcards (*) do not cover subdirectories.
   Therefore, you have to include *every* subdirectory
   that contains Agda source code.
   For the pre-built tools, we have done this for you,
@@ -72,8 +74,8 @@ It is usually used for C and C++ projects.
 
 With some tricks, however,
 it can be used for our Agda backend,
-which will be crucial for importing it
-to the C++ frontend.
+which is going to be crucial for importing it
+in the C++ frontend.
 
 The cornerstone is the CMakeLists.txt file
 in the backend directory.

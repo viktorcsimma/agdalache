@@ -23,6 +23,7 @@ class TriggerFuture: private Future<T> {
     std::vector<std::function<void(T)>> triggers;
 
     // The code calling get() and the triggers.
+    // This will be run on triggerThread.
     void triggerThreadCode() {
         try {
             int result = this->get();

@@ -20,6 +20,7 @@ This means:
 * Qt (a version that is compatible with the machine code produced by GHC).
 
 So, to install this kit, do the following:
+
 * Clone the repository (of course, you need Git for this) by saying::
 
     git clone https://github.com/viktorcsimma/skeleton

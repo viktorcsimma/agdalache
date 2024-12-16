@@ -53,7 +53,7 @@ class Future {
         // do not use elsewhere than in get().
         // This needs different instantiations for different T types
         // to be able to call the appropriate getter from Future.h.
-        T haskellGet();
+        T haskellGet() noexcept;
 
     public:
         // Initialises the Future
@@ -148,14 +148,11 @@ class Future {
         Future() = delete;
 
         // The destructor.
-        // If the calculation has neither been terminated or queried,
-        // we present an error message
-        // and call std::terminate
-        // (like the destructor of std::thread does).
+        // If the calculation is in progress, it gets interrupted
+        // (raising an exception in threads that might be waiting for the result).
         ~Future() {
             if (valid() && !queried()) {
-                fprintf(stderr, "Future destructed without either waiting for it or interrupting it");
-                std::terminate();
+                interrupt();
             }
         }
 };
@@ -165,6 +162,6 @@ class Future {
 // they correspond to the different calls for different primitive types
 // in Future.h.
 template<>
-int Future<int>::haskellGet();
+int Future<int>::haskellGet() noexcept;
 
 #endif

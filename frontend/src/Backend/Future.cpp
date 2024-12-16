@@ -2,6 +2,6 @@
 #include "Future.h" // the Haskell stub
 
 template<>
-int Future<int>::haskellGet() {
+int Future<int>::haskellGet() noexcept {
     return getCIntFromFutureC(stablePtrs);
 }

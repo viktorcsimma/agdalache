@@ -14,7 +14,7 @@ Via apt
 
 The Agda SDK is available as an ``apt`` repo! For installing from there, issue these commands::
 
-  echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/csimmaviktor.gpg] http://fwc.horcsin.hu:8888/ unstable main' | sudo tee /etc/apt/sources.list.d/agdasdk.list
+  echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/csimmaviktor.gpg] https://agda-sdk-apt.web.app/ unstable main' | sudo tee /etc/apt/sources.list.d/agdasdk.list
   curl -fsSL https://csimmaviktor.web.elte.hu/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/csimmaviktor.gpg
   sudo apt update
   sudo apt install agdasdk

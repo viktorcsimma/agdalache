@@ -223,5 +223,5 @@ would be deleted as well.
 For now, the simplest option may be
 running normal futures from an ``std::thread``
 within a for-loop;
-see the `MainViewModel class <https://github.com/viktorcsimma/skeleton/blob/even-counter/frontend/src/ViewModel/MainViewModel.cpp>`_ from the example project
+see the `MainViewModel class <https://github.com/viktorcsimma/even-counter/blob/master/frontend/include/ViewModel/MainViewModel.hpp>`_ from the example project
 for an example.

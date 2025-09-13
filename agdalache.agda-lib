@@ -1,4 +1,4 @@
-name: skeleton
+name: agdalache
 depend:
   agda2hs
 include: backend/src

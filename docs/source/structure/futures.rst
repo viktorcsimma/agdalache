@@ -6,10 +6,9 @@ Futures
 
 .. highlight:: agda
 
-The Agda SDK contains a new, innovative way to run Agda/Haskell calculations in the background
-and retrieve their results later:
-it is based on the Future data structure and class,
-named after the similar ``std::future`` of C++.
+Agdalache contains a new implementation of futures,
+which can be easily exported to C/C++
+and can also be interrupted from there.
 
 Futures are defined on the Agda side in Tool.Future,
 the Future.h header contains their low-level C interface

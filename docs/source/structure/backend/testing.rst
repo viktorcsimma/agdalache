@@ -5,7 +5,7 @@ Testing
 *******
 
 Agda and Haskell have nice and unique tools for testing,
-and the Agda SDK provides ways to take advantage of both.
+and Agdalache provides ways to take advantage of both.
 
 **********
 Agda tests

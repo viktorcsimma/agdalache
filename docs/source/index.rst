@@ -1,10 +1,10 @@
 .. _index:
 
 ************************
-Welcome to the Agda SDK!
+Welcome to the Agdalache documentation!
 ************************
 
-The Agda SDK is a project intended to help developers
+Agdalache is a project intended to help developers
 utilising Agda-powered, provably correct backends
 in C++ Qt applications
 using the *agda2hs* compiler.

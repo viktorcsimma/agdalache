@@ -12,7 +12,7 @@ Installation
 Via apt
 ^^^^^^^
 
-The Agda SDK is available as an ``apt`` repo! For installing from there, issue these commands::
+Agdalache is available as an ``apt`` repo! For installing from there, issue these commands::
 
   echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/csimmaviktor.gpg] https://agda-sdk-apt.web.app/ unstable main' | sudo tee /etc/apt/sources.list.d/agdasdk.list
   curl -fsSL https://csimmaviktor.web.elte.hu/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/csimmaviktor.gpg

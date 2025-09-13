@@ -6,7 +6,7 @@ Tools
 
 .. highlight:: agda
 
-The Agda SDK comes with some tools (under ``backend/src/Tool/``) to make it easier to write agda2hs-compatible programs and proofs.
+Agdalache comes with some tools (under ``backend/src/Tool/``) to make it easier to write agda2hs-compatible programs and proofs.
 
 Futures are covered in a separate section.
 

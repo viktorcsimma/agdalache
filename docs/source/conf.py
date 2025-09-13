@@ -2,7 +2,7 @@
 
 # -- Project information
 
-project = 'The Agda SDK'
+project = 'Agdalache'
 copyright = '2024, Viktor Csimma'
 author = 'Viktor Csimma'
 

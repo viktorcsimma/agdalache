@@ -20,4 +20,4 @@ View
 
 The view is usually simply a Qt-based GUI put on top of the view model discussed before. In the skeleton project, the MainWindow class creates a MainViewModel instance on construction and deletes it on destruction; similarly to what we have seen at the view model itself for HsAppStateWrapper.
 
-There are not many features here anymore that would be specific to the Agda SDK; if you have used Qt, it will be familiar to you. This means that you can freely delegate this part even to someone who has not ever used functional languages before!
+There are not many features here anymore that would be specific to Agdalache; if you have used Qt, it will be familiar to you. This means that you can freely delegate this part even to someone who has not ever used functional languages before!

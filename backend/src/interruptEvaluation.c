@@ -11,7 +11,7 @@
 #endif
 #endif
 
-// See Interaction.h for description.
+// See include/SemaphoreInteraction.h for description.
 
 #ifdef _WIN32
 void interruptEvaluation(const char* semaphoreName) {

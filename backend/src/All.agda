@@ -35,7 +35,6 @@ import Platform.Posix
 {-# LANGUAGE CPP #-}
 import AppState
 import Interaction
-import Logic
 
 import Tool.ErasureProduct
 import Tool.Future

@@ -15,26 +15,24 @@ import Interaction
 import Tool.Future
 
 -- Command keywords.
-aDD_KEYWORD :: String
-aDD_KEYWORD = "add"
-iNCFOR_KEYWORD :: String
-iNCFOR_KEYWORD = "incfor"
 eXIT_KEYWORD :: String
 eXIT_KEYWORD = "exit"
 
 main :: IO ()
 main = do
   putStrLn $ "Hello world! In the code, you can manipulate the app state in various ways.\n"
-  appState <- (MkAppState <$> newIORef 0)
+  appState <- (MkAppState <$> newIORef 0) -- replace 0 with the default(s) your internal variable(s)
   prompt appState
 
 -- the second parameter is the precision to apply
 prompt :: AppState Integer -> IO ()
 prompt appState = do
   counter <- readIORef $ counterRef appState
-  putStr $ "counter: " ++ show counter ++ "> \nPress Enter for the next iteration, or type \"exit\" to exit.\n"
+  putStr $ "Current counter value: " ++ show counter ++ "\nHere, the user can give some prompt.\n> "
   hFlush stdout   -- so that it gets printed immediately
   command <- (unpack . strip . pack) <$> getLine
   if command == eXIT_KEYWORD
   then do {putStrLn "Bye."; return ()}
-  else prompt appState
+  else do
+    putStr "Doing some calculations here.\n" -- insert your calculations here
+    prompt appState

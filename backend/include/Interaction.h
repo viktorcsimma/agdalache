@@ -1,8 +1,8 @@
 #ifndef INTERACTION_H_
 #define INTERACTION_H_
 
-// Here come the declarations of the functions
-// exported from Interaction.agda.
+// NOTE: This is for the _legacy_ semaphore-based solution.
+// Futures are recommended instead.
 
 #include "TinyHsFFI.h"
 #if defined(__cplusplus)

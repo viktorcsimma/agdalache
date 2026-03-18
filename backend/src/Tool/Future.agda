@@ -20,31 +20,25 @@ open import Haskell.Control.Concurrent.MVar
 
 open import Tool.PropositionalEquality
 open import Tool.Foreign
+open import Haskell.GHC.Conc
+open import Haskell.Control.Concurrent.MVar
 
 {-# FOREIGN AGDA2HS
-import Data.IORef
-import Foreign.StablePtr
-import Foreign.Ptr
-import Foreign.Storable
-import Foreign.C.Types
-import Control.Concurrent
-import GHC.MVar
 import GHC.Base (MVar#, RealWorld, IO(..), deRefStablePtr#)
-import qualified GHC.Conc (newStablePtrPrimMVar, PrimMVar)
 import GHC.Stable (StablePtr(..))
 import Unsafe.Coerce ( unsafeCoerce )
-#-}
 
-postulate
-  PrimMVar : Set
-  newStablePtrPrimMVar : MVar a → IO (StablePtr PrimMVar)
-{-# FOREIGN AGDA2HS
-type PrimMVar = GHC.Conc.PrimMVar
-newStablePtrPrimMVar :: MVar a -> IO (StablePtr PrimMVar)
-newStablePtrPrimMVar = GHC.Conc.newStablePtrPrimMVar
+-- as we only use these in a foreign pragma,
+-- we have to import them by hand
+import Control.Concurrent.MVar (putMVar, newEmptyMVar)
+import GHC.Conc (forkIO, killThread)
+import Foreign.Storable (peekElemOff)
+import Foreign.StablePtr (deRefStablePtr)
+import Foreign.C.Types
 #-}
 
 record Future (a : Set) : Set where
+  no-eta-equality; pattern
   constructor MkFuture
   field
     interruptionMVar : MVar ⊤
@@ -55,6 +49,7 @@ open Future public
 postulate
   -- A Left is retured if interrupted.
   runAsync : IO a → IO (Future (Either String a))
+{-# COMPILE AGDA2HS runAsync existing-class #-}
 {-# FOREIGN AGDA2HS
 -- Starts an asynchronous calculation
 -- and returns a Future to it.
@@ -131,6 +126,7 @@ getFromFuture (MkFuture intMVar resMVar) = do
 -- If interrupted, the result is undefined.
 postulate
   getFromFutureC : ∀ {a : Set} -> Ptr (StablePtr PrimMVar) -> IO a
+{-# COMPILE AGDA2HS getFromFutureC existing-class #-}
 {-# FOREIGN AGDA2HS
 getFromFutureC :: forall a. Ptr (StablePtr PrimMVar) -> IO a
 getFromFutureC ptr = do

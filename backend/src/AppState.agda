@@ -22,6 +22,7 @@ open import Haskell.Data.IORef
 -- You can also add type variables,
 -- like in this example.
 record AppState (a : Set) : Set where
+  no-eta-equality
   constructor MkAppState
   field
     -- Here, you should include your variables

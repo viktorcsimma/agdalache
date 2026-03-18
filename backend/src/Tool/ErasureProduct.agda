@@ -7,15 +7,16 @@ open import Agda.Primitive
 
 -- A sigma type (especially the existence quantifier)
 -- with a non-erased value member and an erased proof member.
-record Σ0 {i j} (a : Set i) (@0 b : a → Set j) : Set (i ⊔ j) where
+record S0 {i j} (a : Set i) (@0 b : a → Set j) : Set (i ⊔ j) where
   constructor _:&:_                      -- see https://stackoverflow.com/questions/10548170/what-characters-are-permitted-for-haskell-operators
+  no-eta-equality
   field
     proj₁ : a
     @0 proj₂ : b proj₁
 -- And sorry, you'll have to use _:&:_ instead of _,_.
-open Σ0 public
+open S0 public
 infixr 4 _:&:_
-{-# COMPILE AGDA2HS Σ0 newtype #-}
+{-# COMPILE AGDA2HS S0 newtype #-}
 {-# FOREIGN AGDA2HS
 infixr 4 :&:
 #-}
@@ -23,14 +24,15 @@ infixr 4 :&:
 -- A record type which has both members compiled,
 -- but the argument of the lambda is erased;
 -- so that it won't be dependent-typed after compilation.
-record Σ' {i j} (a : Set i) (b : @0 a → Set j) : Set (i ⊔ j) where
+record S' {i j} (a : Set i) (b : @0 a → Set j) : Set (i ⊔ j) where
   constructor _:^:_                      -- see https://stackoverflow.com/questions/10548170/what-characters-are-permitted-for-haskell-operators
+  no-eta-equality
   field
     proj₁' : a
     proj₂' : b proj₁'
-open Σ' public
+open S' public
 infixr 4 _:^:_
-{-# COMPILE AGDA2HS Σ' #-}
+{-# COMPILE AGDA2HS S' #-}
 {-# FOREIGN AGDA2HS
 infixr 4 :^:
 #-}
@@ -39,6 +41,6 @@ infixr 4 :^:
 -- so we need a prefix version (simply using _:^:_ does not work there).
 -- Maybe this should rather be a pattern synonym,
 -- but I have not tested that with agda2hs yet.
-prefixCon : ∀ {i} {j} {a : Set i} {b : @0 a → Set j} -> (x : a) -> b x -> Σ' a b
+prefixCon : ∀ {i} {j} {a : Set i} {b : @0 a → Set j} -> (x : a) -> b x -> S' a b
 prefixCon = _:^:_
 {-# COMPILE AGDA2HS prefixCon #-}

@@ -1,4 +1,4 @@
 name: skeleton
 depend:
-  agda2hs
+  agda2hs-base
 include: src

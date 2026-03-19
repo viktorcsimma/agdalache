@@ -16,6 +16,17 @@ open import Haskell.Foreign.Ptr
 open import Haskell.Foreign.StablePtr
 
 -- For C types.
+postulate
+  unsafeIntegerToCInt : Integer → CInt
+  unsafeIntToCInt : Int → CInt
+  cIntToInteger : CInt → Integer
+  cIntToInt : CInt → Int
+
+{-# COMPILE AGDA2HS unsafeIntegerToCInt existing-class #-}
+{-# COMPILE AGDA2HS unsafeIntToCInt existing-class #-}
+{-# COMPILE AGDA2HS cIntToInteger existing-class #-}
+{-# COMPILE AGDA2HS cIntToInt existing-class #-}
+
 {-# FOREIGN AGDA2HS
 unsafeIntegerToCInt :: Integer -> CInt
 unsafeIntegerToCInt = fromIntegral
@@ -29,12 +40,6 @@ cIntToInteger = fromIntegral
 cIntToInt :: CInt -> Int
 cIntToInt = fromIntegral
 #-}
-
-postulate
-  unsafeIntegerToCInt : Integer → CInt
-  unsafeIntToCInt : Int → CInt
-  cIntToInteger : CInt → Integer
-  cIntToInt : CInt → Int
 
 CString : Set
 CString = Ptr CChar

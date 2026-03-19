@@ -7,7 +7,9 @@ open import Agda.Primitive
 
 -- A sigma type (especially the existence quantifier)
 -- with a non-erased value member and an erased proof member.
+-- ∃0 will often be used throughout the library as a shortening.
 record S0 {i j} (a : Set i) (@0 b : a → Set j) : Set (i ⊔ j) where
+  no-eta-equality
   constructor _:&:_                      -- see https://stackoverflow.com/questions/10548170/what-characters-are-permitted-for-haskell-operators
   no-eta-equality
   field
@@ -21,10 +23,20 @@ infixr 4 _:&:_
 infixr 4 :&:
 #-}
 
+∃0 : ∀ {a b} {A : Set a} → @0 (A → Set b) → Set (a ⊔ b)
+∃0 = S0 _            -- it makes strange things from this...
+
+-- it's odd, but that is how it works
+Tuple0 : ∀ {i j} (a : Set i) → (@0 b : Set j) → Set (i ⊔ j)
+Tuple0 a b = S0 a (λ _ → b)
+{-# COMPILE AGDA2HS Tuple0 #-}
+
 -- A record type which has both members compiled,
 -- but the argument of the lambda is erased;
 -- so that it won't be dependent-typed after compilation.
+-- Haskell doesn't allow multiple constructors or destructors with the same name; hence the ' after the names.
 record S' {i j} (a : Set i) (b : @0 a → Set j) : Set (i ⊔ j) where
+  no-eta-equality
   constructor _:^:_                      -- see https://stackoverflow.com/questions/10548170/what-characters-are-permitted-for-haskell-operators
   no-eta-equality
   field

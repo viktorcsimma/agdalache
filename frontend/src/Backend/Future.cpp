@@ -1,7 +1,10 @@
 #include "Backend/Future.hpp"
-#include "Future.h" // the Haskell stub
+#include <CFuture.h>
 
 template<>
 int Future<int>::haskellGet() noexcept {
-    return getCIntFromFutureC(stablePtrs);
+    int result;
+    bool success = getC_Int(stablePtrs, &result);
+    if (success) return result;
+    else return -1; // silent failure -- see the header
 }

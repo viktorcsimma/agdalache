@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.9)
 # the language is given so that GNUInstallDirs knows where to install
 project(Skeleton)
 
-add_library(${PROJECT_NAME} src/All.agda src/interruptEvaluation.c include/TinyHsFFI.h include/Future.h include/Interaction.h)
+add_library(${PROJECT_NAME} src/All.agda src/interruptEvaluation.c include/TinyHsFFI.h include/CFuture.h include/Interaction.h)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 add_executable(${PROJECT_NAME}Shell src/All.agda src/Main.hs)
@@ -70,7 +70,7 @@ target_include_directories(${PROJECT_NAME}
                            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
-install(FILES include/TinyHsFFI.h include/Future.h include/Interaction.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES include/TinyHsFFI.h include/CFuture.h include/Interaction.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # For some reason, on Windows, Interaction.o gets corrupted when copied into the library;
 # so it has to be included separately.

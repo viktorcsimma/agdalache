@@ -3,7 +3,7 @@
 -- and to get their results.
 -- Basically an Agda interface to the library cfuture-2.0.
 {-# OPTIONS --erasure #-}
-module Haskell.Control.Concurrent.Future where
+module Haskell.Control.Concurrent.CFuture where
 
 {-# FOREIGN AGDA2HS {-# LANGUAGE ScopedTypeVariables, MagicHash, UnboxedTuples #-} #-}
 
@@ -31,7 +31,8 @@ CFuturePtr = Ptr (StablePtr PrimMVar)
 -- It is recommended not to manipulate the MVars directly,
 -- but to use the functions in the library instead.
 record Future (a : Set) : Set where
-  constructor MkFuture; no-eta-equality
+  no-eta-equality; pattern
+  constructor MkFuture
   field
     interruptionMVar : MVar ⊤        -- ^ For interruption: fill it to interrupt the calculation.
     resultMVar : (MVar (Maybe a))    -- ^ For the result: Nothing if it has been aborted, Just otherwise.
@@ -92,15 +93,15 @@ get (MkFuture _ resMVar) = readMVar resMVar
 -- | A helper function to 'getC' and 'waitC',
 -- expecting a function which we are going to do with the result.
 -- Not meant to be used directly.
-getCHelper : CFuturePtr -> (a -> IO ()) -> IO Bool
-getCHelper futurePtr doOnCompletion = do
+getCHelper : {a : Set} -> CFuturePtr -> (a -> IO ⊤) -> IO Bool
+getCHelper {a} futurePtr doOnCompletion = do
   -- we assume both StablePtrs are of the same size,
   -- which should be in a sane world
-  resMVarSPtr <- peekElemOff (castPtr futurePtr :: Ptr (StablePtr (MVar (Maybe a)))) 1
+  resMVarSPtr <- peekElemOff (the (Ptr (StablePtr (MVar (Maybe a)))) (castPtr futurePtr)) 1
   result <- readMVar =<< deRefStablePtr resMVarSPtr
-  case result of
-        Just a  -> doOnCompletion a >> return True
-        _       -> return False  -- we don't run 'doOnCompletion' in this case
+  case result of \ where
+        (Just x)  -> (doOnCompletion x >> return True)
+        _         -> return False  -- we don't run 'doOnCompletion' in this case
 
 
 -- | A variant of 'get' to call from C
@@ -123,5 +124,5 @@ getC futurePtr destPtr = getCHelper futurePtr (poke destPtr)
 --
 -- Note: do _not_ call this on a freed 'Future'
 -- (the abortC function of the C side frees it).
-waitC : CFuturePtr -> IO Bool
-waitC futurePtr = getCHelper futurePtr $ const $ return ()
+waitC : {a : Set} -> CFuturePtr -> IO Bool
+waitC {a} futurePtr = getCHelper futurePtr $ the (IO ⊤ -> a -> IO ⊤) const $ return tt

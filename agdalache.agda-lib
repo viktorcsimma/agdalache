@@ -1,4 +1,4 @@
 name: agdalache
 depend:
-  agda2hs
+  agda2hs-base
 include: backend/src

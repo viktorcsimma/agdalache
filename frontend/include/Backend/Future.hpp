@@ -53,6 +53,11 @@ class Future {
         // do not use elsewhere than in get().
         // This needs different instantiations for different T types
         // to be able to call the appropriate getter from Future.h.
+        //
+        // NOTE: it fails silently and returns some nonsense value
+        // in case the calculation gets interrupted
+        // (which is why you should not try to use it
+        // outside internal calls).
         T haskellGet() noexcept;
 
     public:

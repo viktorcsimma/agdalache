@@ -9,7 +9,12 @@ extra-source-files:  skeleton.agda-lib,
                      src/Platform/*.agda,
                      src/Test/*.agda,
                      src/Test/Haskell/*.agda,
-                     src/Tool/*.agda
+                     src/Tool/*.agda,
+                     src/Haskell/Control/Concurrent/*.agda,
+                     src/Haskell/Data/*.agda,
+                     src/Haskell/Foreign/*.agda,
+                     src/Haskell/Foreign/C/*.agda,
+                     src/Haskell/GHC/*.agda
 
 custom-setup
   setup-depends:
@@ -33,14 +38,12 @@ library
                        Logic,
                        AppState,
                        Interaction,
-                       Tool.ErasureProduct,
-                       Tool.Future
+                       Tool.ErasureProduct
   exposed-modules:     All,
                        Logic,
                        AppState,
                        Interaction,
                        Tool.ErasureProduct,
-                       Tool.Future,
                        Platform
   if os(windows)
     autogen-modules:   Platform.Win32

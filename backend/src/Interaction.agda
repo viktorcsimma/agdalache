@@ -17,11 +17,11 @@ open import Haskell.Data.IORef
 open import Haskell.Foreign.StablePtr
 open import Haskell.Foreign.Ptr
 open import Haskell.Foreign.C.Types
+open import Haskell.Control.Concurrent.CFuture
 
 open import AppState
 open import Logic
 open import Tool.Foreign
-open import Tool.Future
 
 -- Initialises the application state, with 0 as counter value.
 -- Required type constraints have to be provided here, too.

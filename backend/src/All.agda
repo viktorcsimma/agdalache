@@ -18,14 +18,8 @@ import Tool.ErasureProduct
 import Tool.Cheat
 import Tool.PropositionalEquality
 import Tool.Relation
-import Tool.Future
-
--- The tests;
--- they only get here to be checked by the typechecker,
--- but we do not want GHC to compile the empty files generated.
-import Test.ExampleTest
-import Test.Haskell.ExampleTest
-
+-- this does not have a .agda file
+-- import Platform
 import Platform.Win32
 import Platform.Posix
 
@@ -37,9 +31,8 @@ import AppState
 import Interaction
 
 import Tool.ErasureProduct
-import Tool.Future
--- import Tool.Cheat                    -- this is empty
--- import Tool.PropositionalEquality    -- this is empty
+-- import Tool.Cheat                    -- this would be empty
+-- import Tool.PropositionalEquality    -- this would be empty
 import Platform
 -- This cannot be put here; CMake's GHC would search for QuickCheck.
 -- import Test.Haskell.ExampleTest

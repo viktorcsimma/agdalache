@@ -21,7 +21,8 @@ library
   build-depends:       base     >= 4.13    && < 4.20,
                        containers,
                        text,
-                       deepseq >= 1.4
+                       deepseq >= 1.4,
+                       cfuture >= 2.0
   if os(windows)
     build-depends:     Win32 >= 2.12
   elif os(linux) || os(darwin)
@@ -59,6 +60,7 @@ executable Shell
                        containers,
                        text,
                        deepseq >= 1.4,
+                       cfuture >= 2.0,
                        skeleton
   if os(windows)
     build-depends:     Win32 >= 2.12
@@ -79,6 +81,7 @@ test-suite QuickCheckTests
                        containers,
                        text,
                        deepseq >= 1.4,
+                       cfuture >= 2.0,
                        skeleton,
                        QuickCheck >= 2.14
   default-language:    GHC2021

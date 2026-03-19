@@ -32,7 +32,18 @@ into a folder called ``build`` under the backend directory
 so that they do not get up mixed with real source files.
 For C++ files, expect the usual structure.
 
-If you want to install the backend library globally, this is also possible
+**Important:** for the backend compilation to function,
+you have to install the needed Cabal packages by hand,
+as GHC will not see them otherwise
+(the script makes a GHC call, not a Cabal one).
+E.g. for the package ``cfuture-2.0``,
+you need to switch to the backend root and call:
+
+```
+cabal install --lib text-2.0.2 --package-env .
+```
+
+If you want to install the backend library globally, this is also possible.
 
 For the frontend, you may want to run CMake from Qt Creator,
 especially as CMake may not find your Qt installation by itself.

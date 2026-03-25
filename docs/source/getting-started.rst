@@ -47,7 +47,7 @@ directly from their producers.
 This means:
 
 * GHC;
-* agda2hs (a `custom version <https://github.com/viktorcsimma/agda2hs/tree/the-agda-sdk>`_ -- the vanilla compiler will probably not work);
+* agda2hs (commit acb521e on master has been tested to work with Agdalache);
 * Qt (a version that is compatible with the machine code produced by GHC).
 
 So, to install this kit, do the following:
